@@ -150,7 +150,8 @@ function get3rdCar(inventory) {
  * it will return `This is a Lincoln Navigator`.
 */
 function getCarInfoByIndex(inventory, index) {
-  /* code here */
+  const carInfoByIndex = inventory[index];
+  return `This is a ${carInfoByIndex.car_make} ${carInfoByIndex.car_model}`
 }
 
 /**
@@ -164,8 +165,9 @@ function getCarInfoByIndex(inventory, index) {
  * For example, if getLastCarInfo is invoked passing the inventory inside /data/inventory.js,
  * it will return `This is a Lincoln Town Car`.
 */
-function getLastCarInfo(/* code here */) {
-  /* code here */
+function getLastCarInfo(inventory) {
+  const lastCarInfo = inventory[inventory.length -1];
+  return `This is a ${lastCarInfo.car_make} ${lastCarInfo.car_model}`
 }
 
 /**
@@ -180,8 +182,12 @@ function getLastCarInfo(/* code here */) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
-  /* code here */
+function getCarInfoById(inventory, id) {
+  for (let i = 0; i < inventory.length; i++) {
+	  if (inventory[i].id === id){
+  		return `This is a ${inventory[i].car_make} ${inventory[i].car_model}`
+	  }
+  }
 }
 
 /**
@@ -192,8 +198,8 @@ function getCarInfoById(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
 */
-function sortCarInventory(/* code here */) {
-  /* code here */
+function sortCarInventory(inventory) {
+	return inventory.sort ((a,b) => (a.car_model > b.car_model ? 1 : -1))
 }
 
 /**
@@ -205,8 +211,12 @@ function sortCarInventory(/* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * getModelYears returns an array containing all the 'car_year's in the inventory.
 */
-function getModelYears(/* code here */) {
-  /* code here */
+function getModelYears(inventory) {
+	const modelYear = [];
+	for (let i = 0; i < inventory.length; i++) {
+		modelYear.push(inventory[i].car_year);
+	}
+	return modelYear;
 }
 
 /**
@@ -221,8 +231,14 @@ function getModelYears(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+function getOlderCars(inventory, maxYear) {
+	const olderCars = [];
+	for (let i = 0; i < inventory.length; i++) {
+		if (inventory[i].car_year <= maxYear) {
+			olderCars.push(inventory[i]);
+		}
+	}
+	return olderCars;
 }
 
 /**
@@ -236,8 +252,20 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
-  /* code here */
+function getGermanCars(inventory) {
+	const germanCars = [];
+	for (let i = 0; i < inventory.length; i++) {
+		const german = inventory[i];
+		if (
+		german.car_make === "Audi" ||
+		german.car_make === "Mercedes-Benz" ||
+		german.car_make === "Volkswagen" ||
+		german.car_make === "BMW"
+		){
+			germanCars.push(german);
+		}
+	}
+	return germanCars;
 }
 
 /**
@@ -258,9 +286,9 @@ function getGermanCars(/* code here */) {
  *   return num * 2
  * }
 */
-const sum = null; // code here!
-const addFive = null; // code here!
-const argTimesTwo = null; // code here!
+const sum = (a, b) => a + b; // code here!
+const addFive = (num) => num + 5; // code here!
+const argTimesTwo = (num) => num * 2; // code here!
 
 /**
  * ### Challenge `carMaker`
@@ -275,8 +303,14 @@ const argTimesTwo = null; // code here!
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
-  /* code here */
+function carMaker(num) {
+  return {
+	  odometer: num,
+	  drive: function(distance) {
+		  this.odometer = this.odometer + distance;
+		  return this.odometer;
+	  }
+  }
 }
 
 /// ////// END OF CHALLENGE /////////
